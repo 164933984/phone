@@ -24,8 +24,8 @@
           }
           .notify-btn { background: #28a745; }
           .notify-btn:hover { background: #218838; }
-          .call-btn { background: #17a2b8; }
-          .call-btn:hover { background: #138496; }
+          .call-btn { background: #0483F1; }
+          .call-btn:hover { background: #036dc9; }
         </style>
 </head>
 <body>
@@ -34,7 +34,7 @@
   <p>如需通知车主，请点击以下按钮</p>
   <button class="notify-btn">通知车主挪车</button>
   <button class="call-btn">拨打车主电话</button></div>
-  <a href="" v-show="false" ref="tels"></a>
+  <a href="tel:13849347364" v-show="false" id="tels"></a>
 <script>
 function notifyOwner() {
     fetch("https://wxpusher.zjiecode.com/api/send/message", {
@@ -62,9 +62,7 @@ function notifyOwner() {
 }
  
 function callOwner() {
-    // window.location.href = "tel:13849347364";
-    this.$refs.tels.href = "tel://13849347364"
-            this.$refs.tels.click()
+    document.getElementById("tels").click();
 }
 </script>
 </body></html>
