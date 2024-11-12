@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>通知车主挪车</title>
-  <style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>通知车主挪车</title>
+    <style>
           * { box-sizing: border-box; margin: 0; padding: 0; }
           body { font-family: Arial, sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; background: #f0f2f5; color: #333; }
           .container { text-align: center; padding: 20px; width: 100%; max-width: 400px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); background: #fff; }
@@ -26,43 +26,47 @@
           .notify-btn:hover { background: #218838; }
           .call-btn { background: #0483F1; }
           .call-btn:hover { background: #036dc9; }
-        </style>
+
+    </style>
 </head>
 <body>
 <div class="container">
-  <h1>通知车主挪车</h1>
-  <p>如需通知车主，请点击以下按钮</p>
-  <button class="notify-btn">通知车主挪车</button>
-  <button class="call-btn">拨打车主电话</button></div>
-  <a href="tel:13849347364" v-show="false" id="tels"></a>
+    <h1>通知车主挪车</h1>
+    <p>如需通知车主，请点击以下按钮</p>
+    <button class="notify-btn" onclick="notifyOwner()">通知车主挪车</button>
+    <button class="call-btn" onclick="callOwner()">拨打车主电话</button>
+</div>
+<a href="tel:13849347364" v-show="false" id="tels"></a>
 <script>
-function notifyOwner() {
-    fetch("https://wxpusher.zjiecode.com/api/send/message", {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({
-            appToken: "AT_en9oitBK5En279WrUoRoqpIXr20f4hVC",
-            content: "您好，有人需要您挪车，请及时处理。",
-            contentType: 1,
-            uids: ["UID_hilpNxiuJCYSJFqHmfnEJJGoWh1H"]
-        })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.code === 1000) {
-            alert("通知已发送！");
-        } else {
-            alert("通知发送失败，请稍后重试。");
-        }
-    })
-    .catch(error => {
-        console.error("Error sending notification:", error);
-        alert("通知发送出错，请检查网络连接。");
-    });
-}
- 
-function callOwner() {
-    document.getElementById("tels").click();
-}
+  function notifyOwner() {
+      fetch("https://wxpusher.zjiecode.com/api/send/message", {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify({
+              appToken: "AT_en9oitBK5En279WrUoRoqpIXr20f4hVC",
+              content: "您好，有人需要您挪车，请及时处理。",
+              contentType: 1,
+              uids: ["UID_hilpNxiuJCYSJFqHmfnEJJGoWh1H"]
+          })
+      })
+      .then(response => response.json())
+      .then(data => {
+          if (data.code === 1000) {
+              alert("通知已发送！");
+          } else {
+              alert("通知发送失败，请稍后重试。");
+          }
+      })
+      .catch(error => {
+          console.error("Error sending notification:", error);
+          alert("通知发送出错，请检查网络连接。");
+      });
+  }
+
+  function callOwner() {
+      document.getElementById("tels").click();
+  }
+
 </script>
-</body></html>
+</body>
+</html>
